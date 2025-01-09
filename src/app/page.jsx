@@ -7,7 +7,8 @@ export default function Home() {
   const [daytype, setdaytype] = useState("");
   const [temp, settemp] = useState("");
   const [city, setcity] = useState("Ulaanbaatar");
-
+  const [time, settime] = useState("");
+  // search data 
   async function getData() {
     const result = await fetch("https://countriesnow.space/api/v0.1/countries");
     const data = await result.json();
@@ -17,6 +18,8 @@ export default function Home() {
     incomeCities = incomeCities.flat();
     setCities(incomeCities);
   }
+
+
   const searchHandler = (e) => {
     getData();
     const search = e.target.value;
@@ -30,20 +33,43 @@ export default function Home() {
     });
     setSearched(filtered);
   };
+
+
   function selectcite(city) {
     // getCiteData();
     setcity(city);
     setSearchValue("");
     setSearched([]);
   }
+
+
   async function getCiteData() {
-    console.log("hi llra")
-    const okey = await fetch(
-      `https://api.weatherapi.com/v1/forecast.json?key=a474d239e7984b44bf320539250801&q=${city}`
-    );
+    const okey = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=a474d239e7984b44bf320539250801&q=${city}`);
     const data = await okey.json();
     settemp(data.current.temp_c);
     setdaytype(data.current.condition.text);
+    settime(data.current.last_updated);
+  }
+
+
+  const daytypeimg =()=>{
+    const t = daytype.toLowerCase();
+    switch (true) {
+      case t.includes("sun") :
+       return <img src="sun.png" alt="" className="w-[262px] h-[262px]"/>
+      case t.includes("rain") :
+       return <img src="Rain.png" alt="" className="w-[262px] h-[262px]"/>
+      case t.includes("Cloudy"):
+        return <img src="Clouds.png" alt="" className="w-[262px] h-[262px]"/>
+      case t.includes("wind"):
+        return <img src="Wind.png" alt="" className="w-[262px] h-[262px]"/>
+      case t.includes("thunder"):
+        return <img src="thunder.png" alt="" className="w-[262px] h-[262px]"/>
+      case t.includes("snow"):
+        return <img src="snow.png" alt="" className="w-[262px] h-[262px]"/>
+        
+    }
+    console.log("hhhe")
   }
   getCiteData()
   return (
@@ -71,16 +97,19 @@ export default function Home() {
         <div className="absolute border border-gray-500/50 rounded-full w-[940px] h-[940px] right-[650px] top-[130px]"></div>
         <div className="absolute border border-gray-500/50 rounded-full w-[1340px] h-[1340px] right-[450px] top-[-70px]"></div>
         <div className="absolute border border-gray-500/50 rounded-full w-[1740px] h-[1740px] right-[250px] top-[-270px]"></div>
-        <img src="moon.svg" className="absolute " />
-        {/* <div> <img src={sun} alt="loading..." /></div>
-        <div> <img src={moon} alt="loading..." /></div> */}
+        <img src="sun.svg" className="absolute left-[280px] top-[127px]"/>
 
         <div className="absolute w-1/2 h-full left-0 top-0 flex justify-center items-center">
-          <div className="w-[414px] h-[828px] backdrop-blur-[12px] drop-shadow-2xl bg-white">
-            <p>{Date()}</p>
-            <h2 className="text-black">{city} </h2>
-            <p>{daytype}</p>
-            <p>{temp}</p>
+          <div className="w-[414px] h-[828px] backdrop-blur-[12px] shadow-2xl bg-[rgba[10,10,10,1]] rounded-[48px]">
+            <p className="text-gray-400 ml-[40px] mt-[56px]">{time}</p>
+            <h2 className=" ml-[40px] mt-[5px] text-[#111827] text-5xl font-extrabold">{city}</h2>
+            <div className="w-[100%] flex justify-center mt-12">
+            {daytypeimg()}
+            </div>
+            <div className="flex justify-center ">
+              <p className="text-transparent bg-clip-text font-extrabold text-[110px] -mt-10 bg-gradient-to-b from-black to-white">{temp}˚</p>
+            </div>
+            <p className="font-extrabold mb-12 h-6 text-[#FF8E27]">{daytype}</p>
           </div>
         </div>
 
@@ -99,15 +128,11 @@ export default function Home() {
               onChange={searchHandler}
             />
           </div>
-          <div className="">
+          <div className="w-[512px] mt-[10px] bg-gray-100/75 backdrop-blur-[12px]">
             {searched.length > 0 &&
-              searched.slice(0, 10).map((city) => (
-                <p
-                  className="text-black"
-                  onClick={() => {
-                    selectcite(city);
-                  }}
-                >
+              searched.slice(0, 4).map((city) => (
+                
+                <p className="text-black h-[80px] p-[20px] ml-[15px] text-[20px]" onClick={() => {selectcite(city)}}>
                   {city}
                 </p>
               ))}
