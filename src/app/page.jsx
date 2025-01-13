@@ -66,23 +66,23 @@ export default function Home() {
     const t = weather[0]?.text.toLowerCase();
     switch (true) {
       case t.includes("sun"):
-        return <img src="Sun.png" alt="" />;
+        return <img src="Sun.png" alt="" className="w-[262px] h-[262px]"/>;
       case t.includes("rain"):
-        return <img src="Rain.png" alt="" />;
+        return <img src="Rain.png" alt="" className="w-[262px] h-[262px]"/>;
       case t.includes("cloud"):
-        return <img src="Clouds.png" alt="" />;
+        return <img src="Clouds.png" alt="" className="w-[262px] h-[262px]"/>;
       case t.includes("mist"):
-        return <img src="Clouds.png" alt="" />;
+        return <img src="Clouds.png" alt="" className="w-[262px] h-[262px]"/>;
       case t.includes("snow"):
-        return <img src="Snow.png" alt="" />;
+        return <img src="Snow.png" alt="" className="w-[262px] h-[262px]"/>;
       case t.includes("freez"):
-        return <img src="Snow.png" alt="" />;
+        return <img src="Snow.png" alt="" className="w-[262px] h-[262px]"/>;
       case t.includes("wind"):
-        return <img src="Clouds.png" alt="" />;
+        return <img src="Clouds.png" alt="" className="w-[262px] h-[262px]"/>;
       case t.includes("overcast"):
-        return <img src="Clouds.png" alt="" />;
+        return <img src="Clouds.png" alt="" className="w-[262px] h-[262px]"/>;
       case t.includes("thunder"):
-        return <img src="thunder.png" alt="" />;
+        return <img src="thunder.png" alt="" className="w-[262px] h-[262px]"/>;
     }
   };
     const renderWeatherIcon = () => {
@@ -91,23 +91,23 @@ export default function Home() {
 
       switch (true) {
         case res.includes("clear"):
-          return <img src="clearnight.png" alt="" />;
+          return <img src="clearnight.png" alt="" className="w-[262px] h-[262px]"/>;
         case res.includes("rain"):
-          return <img src="rainnight.png" alt="" />;
+          return <img src="rainnight.png" alt="" className="w-[262px] h-[262px]"/>;
         case res.includes("cloud"):
-          return <img src="cloudnight.png" alt="" />;
+          return <img src="cloudnight.png" alt="" className="w-[262px] h-[262px]"/>;
         case res.includes("mist"):
-          return <img src="cloudnight.png" alt="" />;
+          return <img src="cloudnight.png" alt="" className="w-[262px] h-[262px]"/>;
         case res.includes("snow"):
-          return <img src="snownight.png" alt="" />;
+          return <img src="snownight.png" alt="" className="w-[262px] h-[262px]"/>;
         case res.includes("freez"):
-          return <img src="snownight.png" alt="" />;
+          return <img src="snownight.png" alt="" className="w-[262px] h-[262px]"/>;
         case res.includes("wind"):
-          return <img src="windnight.png" alt="" />;
+          return <img src="windnight.png" alt="" className="w-[262px] h-[262px]"/>;
         case res.includes("overcast"):
-          return <img src="windnight.png" alt="" />;
+          return <img src="windnight.png" alt="" className="w-[262px] h-[262px]"/>;
         case res.includes("thunder"):
-          return <img src="thunderstormnight.png" alt="" />;
+          return <img src="thunderstormnight.png" alt="" className="w-[262px] h-[262px]"/>;
       }
     };
 
@@ -157,13 +157,19 @@ export default function Home() {
               {daytypeimg()}
             </div>
             <div className="flex justify-center ">
-              <p className="text-transparent bg-clip-text font-extrabold text-[110px] -mt-10 bg-gradient-to-b from-black to-white">
+              <p className="text-transparent bg-clip-text font-extrabold text-[110px] mt-12 bg-gradient-to-b from-black to-white">
                 {weather[0]?.temp}˚
               </p>
             </div>
-            <p className="font-extrabold mb-12 h-6 text-[#FF8E27]">
+            <p className="font-extrabold h-6 text-[#FF8E27] ml-16">
               {weather[0]?.text}
             </p>
+            <div className="flex justify-between mt-10">
+              <img src="menu.svg" alt="" className="ml-10"/>
+              <img src="locate1.svg" alt="" />
+              <img src="like.svg" alt="" />
+              <img src="profile.svg" alt="" className="mr-10"/>
+            </div>
           </div>
         </div>
 
@@ -179,13 +185,19 @@ export default function Home() {
               {renderWeatherIcon()}
             </div>
             <div className="flex justify-center ">
-              <p className="text-transparent bg-clip-text font-extrabold text-[110px] -mt-10 bg-gradient-to-b from-black to-white">
+              <p className="text-transparent bg-clip-text font-extrabold text-[110px] mt-12 bg-gradient-to-b from-black to-white">
                 {weather[1]?.temp}˚
               </p>
             </div>
-            <p className="font-extrabold mb-12 h-6 text-[#FF8E27]">
+            <p className="font-extrabold h-6 text-[#FF8E27] ml-16">
               {weather[1]?.text}
             </p>
+            <div className="flex justify-between mt-10">
+              <img src="menu.svg" alt="" className="ml-10"/>
+              <img src="locate1.svg" alt="" />
+              <img src="like.svg" alt="" />
+              <img src="profile.svg" alt="" className="mr-10"/>
+            </div>
           </div>
         </div>
 
@@ -200,8 +212,9 @@ export default function Home() {
             <input
               value={searchValue}
               type="text"
-              className="border-none text-black"
+              className="border-none text-black text-[30px]"
               onChange={searchHandler}
+              placeholder="Search"
             />
           </div>
           <div className="w-[512px] mt-[10px] bg-gray-100/75 backdrop-blur-[12px]">
